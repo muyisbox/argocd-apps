@@ -23,7 +23,7 @@ spec:
       valuesObject:
         {{- toYaml $config.helm.values | nindent 8 }}
       {{- end }}
-    ignoreMissingValueFiles: true
+    # ignoreMissingValueFiles: true
   destination:
     server: "https://kubernetes.default.svc"
     namespace: {{ $config.namespace }}
