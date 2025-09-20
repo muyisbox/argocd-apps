@@ -1,0 +1,45 @@
+{{- range $app, $config := .Values.apps }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ $app }}
+  namespace: argocd
+spec:
+  project: {{ default "default" $config.project }}
+  source:
+    chart: {{ $config.chart }}
+    repoURL: {{ $config.repoURL }}
+    targetRevision: {{ $config.targetRevision }}
+    helm:
+      releaseName: {{ $config.helm.releaseName }}
+      {{- if $config.helm.valueFiles }}
+      valuesFiles:
+        {{- range $config.helm.valueFiles }}
+        - {{ . }}
+        {{- end }}
+      {{- end }}
+      {{- if $config.helm.values }}
+      valuesObject:
+        {{- toYaml $config.helm.values | nindent 8 }}
+      {{- end }}
+    ignoreMissingValueFiles: true
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: {{ $config.namespace }}
+  syncPolicy:
+    automated:
+      enabled: true
+      selfHeal: true
+      prune: true
+    managedNamespaceMetadata: 
+      labels:
+        app.kubernetes.io/managed-by: argocd-app-of-apps
+        team.kubernetes.io/owner: k8s-class
+      annotations:
+        app.kubernetes.io/created-by: argocd-app-of-apps
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+    
+{{- end }}

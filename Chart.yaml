@@ -1,0 +1,5 @@
+apiVersion: v2 # Required
+name: app of apps # Required
+version: 0.1.0 # Required. A SemVer 2 version string of the chart
+description: A helm chart to deploy argocd app of apps pattern
+type: application
