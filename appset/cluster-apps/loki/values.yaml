@@ -1,0 +1,4 @@
+loki-stack:
+  enabled: true
+  grafana:
+    enabled: true
