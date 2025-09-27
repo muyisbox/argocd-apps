@@ -32,7 +32,7 @@ apps:
         grafana:
           additionalDataSources:
           - name: loki-logs
-            # access: proxy
+            access: proxy
             # basicAuth: true
             # secureJsonData:
             #     basicAuthPassword: pass
@@ -42,7 +42,7 @@ apps:
             #     tlsSkipVerify: true
             # orgId: 1
             type: loki
-            url: http://loki.loki:3100
+            url: http://loki.loki:3100/
             version: 1
   cert-manager:
     namespace: cert-manager
