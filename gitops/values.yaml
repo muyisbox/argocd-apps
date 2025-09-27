@@ -29,6 +29,21 @@ apps:
             enabled: true
           prometheusSpec:
             replicas: 2
+        grafana:
+          additionalDataSources:
+          - name: loki-logs
+            # access: proxy
+            # basicAuth: true
+            # secureJsonData:
+            #     basicAuthPassword: pass
+            # basicAuthUser: daco
+            # editable: false
+            # jsonData:
+            #     tlsSkipVerify: true
+            # orgId: 1
+            type: loki
+            url: http://loki.loki:3100
+            version: 1
   cert-manager:
     namespace: cert-manager
     chart: cert-manager
