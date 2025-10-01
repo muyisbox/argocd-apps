@@ -6,6 +6,13 @@ apps:
     targetRevision: 2.40.4
     helm:
       releaseName: argo-rollouts
+      values:
+        metrics:
+          enabled: true
+          serviceMonitor:
+            enabled: true
+            additionalLabels:
+              release: kube-prometheus-stack
   kube-prometheus-stack:
     namespace: monitoring
     chart: kube-prometheus-stack
