@@ -1,0 +1,15 @@
+apiVersion: v2 # Required
+name: istio # Required
+description: A Helm chart for Kubernetes
+type: application
+version: 1.27.1 # Required
+dependencies:
+  - name: base
+    version: 1.27.1
+    repository: https://istio-release.storage.googleapis.com/charts
+    alias: istiod
+    condition: istiod.enabled
+  - name: istiod
+    version: 1.27.1
+    repository: https://istio-release.storage.googleapis.com/charts
+    condition: istiod.enabled
