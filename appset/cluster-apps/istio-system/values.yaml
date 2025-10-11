@@ -1,3 +1,6 @@
 istiod:
   enabled: true
   revisionTags: ["default"]
+  env:
+    - name: ENABLE_NATIVE_SIDECARS
+      value: "true"
